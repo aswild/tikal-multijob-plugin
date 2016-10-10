@@ -383,19 +383,19 @@ public class PhaseJobsConfig implements Describable<PhaseJobsConfig> {
 	 * defined in the different configs, e.g. predefined parameters.
 	 *
 	 * @param build
-	 *            build that is triggering project
+	 *			  build that is triggering project
 	 * @param listener
-	 * 			  Project's listener
+	 *			  Project's listener
 	 * @param project
-	 *            Project that is being triggered
+	 *			  Project that is being triggered
 	 * @param isCurrentInclude
-	 *            Include parameters from the current build.
+	 *			  Include parameters from the current build.
 	 * @return
-	 * 			retuen List
+	 *			retuen List
 	 * @throws IOException
-	 * 			throws IOException
+	 *			throws IOException
 	 * @throws InterruptedException
-	 * 			throws InterruptedException
+	 *			throws InterruptedException
 	 */
 	public List<Action> getActions(AbstractBuild build, TaskListener listener,
 			AbstractProject project, boolean isCurrentInclude)
@@ -519,6 +519,12 @@ public class PhaseJobsConfig implements Describable<PhaseJobsConfig> {
 			@Override
 			public boolean isKillPhase(Result result) {
 				return result.equals(Result.ABORTED) ? true : false;
+			}
+		},
+		NEVER_EVER("Never (continue phase execution even if the job was aborted)") {
+			@Override
+			public boolean isKillPhase(Result result) {
+				return false;
 			}
 		},
 		UNSTABLE("Unstable (stop the phase execution if the job is unstable)") {
